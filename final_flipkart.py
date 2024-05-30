@@ -35,20 +35,8 @@ def main_fk(product_name="everest"):
     
     soup = get_soup(main_url)
     print(main_url)
-
-    output_file = './static/rating_container.png'
-    try:
-        capture_element_screenshot(main_url, 'HO1dRb xsbJxZ', "row q4T7rk _8-rIO3", output_file)
-    except Exception as e:
-        raise ValueError(f"Error occurred during screenshot capture: {str(e)}")
-
-    # total_reviews = get_total_pages(soup)
-    # if total_reviews == 0:
-    #     raise ValueError("NO REVIEWS FOR THE PRODUCT GIVEN")
     try:
         count = get_total_pages(soup)
-
-    
     except:
         # try:
         #     p_name = p_name.lstrip("https://www.flipkart.com/").split("/p/")[0].replace("-", " ")
@@ -63,6 +51,8 @@ def main_fk(product_name="everest"):
     for i in range(1, count + 1):
         revs += extract(get_soup(main_url, i, False))
         print(f"Scraping page {i} out of {count}")
+        if len(revs)>=150:
+            break
 
     df = pd.DataFrame(revs)
     df.to_excel("new.xlsx", index=False)
@@ -70,10 +60,35 @@ def main_fk(product_name="everest"):
     mini_revs = []
     generate_word_cloud(revs)
     print(len(revs))
+    output_file = './static/rating_container.png'
 
 
     return revs, p_name
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # try:
+    #     capture_element_screenshot(main_url, 'HO1dRb xsbJxZ', "row q4T7rk _8-rIO3", output_file)
+    # except Exception as e:
+    #     raise ValueError(f"Error occurred during screenshot capture: {str(e)}")
+
+    # total_reviews = get_total_pages(soup)
+    # if total_reviews == 0:
+    #     raise ValueError("NO REVIEWS FOR THE PRODUCT GIVEN")
 # from selenium.webdriver.chrome.service import Service
 
 # def capture_element_screenshot(url, class_name, class_name2, output_file):

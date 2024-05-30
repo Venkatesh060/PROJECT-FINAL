@@ -26,6 +26,10 @@ def get_total_pages(soup):
     count = total_reviews // 10 + 1 if total_reviews % 10 != 0 else total_reviews // 10
     print(f"{count} times we have to scrape for all reviews.. each page 10 revs")
     
+    if count>15:
+        print("We have too many reviews, we will try to get 150 most helpful ones !!")
+        
+
     return count
 if __name__ =="__main__":
     get_total_pages()

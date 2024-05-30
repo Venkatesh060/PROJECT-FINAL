@@ -41,31 +41,16 @@
           "
         />
       </header>
-      <div class="PR-fetch-box">
-        <div class="snowflake">
-          <i class="fa-solid fa-magnifying-glass"></i>
+        <div class="PR-fetch-box">
+          <p id="fetching-message">
+            Fetching for
+            <span class="mask-text"
+              >{{ product_name if product_name|length < 18 else ' your product '
+              }}</span
+            >, please wait...
+          </p>
+          <div class="loader"></div>
         </div>
-        <div class="snowflake">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <div class="snowflake">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <div class="snowflake">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <div class="snowflake">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-
-        <p id="fetching-message">
-          Fetching for
-          <span class="mask-text"
-            >{{ product_name if product_name|length < 18 else ' your product '
-            }}</span
-          >, please wait...
-        </p>
-        <div class="loader"></div>
       </div>
     </div>
     <script>
@@ -83,7 +68,8 @@
               // Update the fetching message with total pages found
               document.getElementById(
                 "fetching-message"
-              ).innerText = `I think i found them, please wait...`;
+              ).innerText = `I think i found {{ product_name if product_name|length < 18 else ' your product '
+            }}, please wait...`;
               // Send a GET request to fetch_reviews to start scraping
               fetch("/fetch_reviews")
                 .then((response) => {

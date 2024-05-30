@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
 
-def extract(soup):
+def extract(soup,rev_link="#"):
     reviews = soup.find_all("div", class_="col EPCmJX Ma1fCG")
+    avg_rating = soup.find("div", class_= "ipqd2A").text
+    price = soup.find("div", class_= "Nx9bqj").text
+    
     revs = []
 
     for review in reviews:
@@ -14,7 +17,11 @@ def extract(soup):
         date = review.find_all("p", class_="_2NsDsF")[1].text.strip()
         review_body = review.find("div", class_="ZmyHeo").text.split("READ MORE")[0].strip()
 
+
         d1 = {
+            "rev_link:":rev_link if rev_link else "#",
+            "Price":price,
+            "avg_rating":avg_rating if len(avg_rating)>0 else "",
             "Product": product_name_2,
             "customer_name": customer_name.upper(),
             "rating": rating,
@@ -24,13 +31,16 @@ def extract(soup):
         }
         revs.append(d1)
         print(
+            f"LINK          :  {rev_link}",
+            f"Price         :  {price}",
             f"Product       :  {d1['Product']}",
+            f"AVG_RATING    :  {d1['avg_rating']}",
             f"customer_name :  {d1['customer_name']}",
             f"rating        :  {d1['rating']}",
             f"mini-review   :  {d1['mini_review']}",
             f"review-body   :  {d1['review_body']}",
             f"date          :  {d1['date']}",
             sep="\n", end="\n\n*****************************\n"
-        )
+            )
 
     return revs

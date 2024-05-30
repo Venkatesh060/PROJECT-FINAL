@@ -12,6 +12,12 @@ def capture_element_screenshot(url, class_name, class_name2, output_file):
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--window-size=1920x1080')
+    
+    proxy = 'http://muralimanas30:IamMurali591_@unblock.oxylabs.io:60000'
+    
+    
+    
+    chrome_options.add_argument(f"--proxy-server={proxy}")
 
     # Initialize Chrome WebDriver using webdriver-manager
     # driver_path = 'PROJECT\ChromeDriver\chromedriver.exe'

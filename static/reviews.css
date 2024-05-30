@@ -117,7 +117,7 @@ body{
 #review-container {
     margin: 20px 5%;
     width: 90%;
-    justify-content: center;
+    
     
 
 }
@@ -162,4 +162,10 @@ body{
     }
 
 
+}
+.ftr{
+    height: 200px;
+    backdrop-filter: blur(20px);
+    padding: 1rem;text-align: center;
+    margin: 0.5rem;
 }

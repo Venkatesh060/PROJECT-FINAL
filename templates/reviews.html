@@ -14,33 +14,36 @@
         <header class="review-header">
             <h1>Product Reviews - {{ product_name }}</h1>
         </header>
-        <span class="for-buttons">
-            <a href="/"><button class="btn">Back</button></a>
-            <br>
+        <span class="col-fluid-5 ">
+            <a href="/"><button class="btn">Back</button></a> <br>
             <a href="/wordcloud" target="_blank" ><button class="btn">Word Cloud</button></a>
+            <a title="Give your feedback" target="_blank" href="mailto:22B81A0591@cvr.ac.in?subject=Feedback&body=Dear%20team%2C%0A%0AI%20would%20like%20to%20provide%20the%20following%20feedback%3A%0A%0A%5BYour%20feedback%20here%5D%0A%0AThank%20you%2C%0A%5BYour%20Name%5D">
+                <button type="button" id="sort-reviews-btn" class="btn">Give Feedback</button>
+                </a>
             <form action="/sort_reviews">
-                
                 <button type="submit" id="sort-reviews-btn" class="btn">Sort Reviews</button>
             </form>
         </span>
-        
-        <div class="image-container">
+        <!-- <div class="image-container">
             <a target="_blank" href="{{main_url}}"><img src="./static/rating_final_2.png" alt="review-image"></a>
-        </div>
+        </div> -->
         <div class="container-xxl" id="review-container">
             {% if reviews %}
                 {% for review in reviews %}
                     <div class="col-sm-5 text-left" id="review-box" data-rating="{{ review.rating }}">
                         <h2><i class="fa-solid fa-user fa-flip-horizontal fa-xs" style="color: #5e29ff;"></i> {{ review.customer_name }}</h2>
                         <p><strong>Product:</strong> {{ review.Product }}</p>
+                        <strong><p>Average Rating:</strong> {{review.avg_rating}}</p>
                         <p class="rating"><strong>Rating:</strong> {{ review.rating*'<i class="fa-solid fa-star"></i>' | safe }}</p>
                         <p><strong>Mini Review:</strong> {{ review.mini_review }}</p>
                         <p><strong>Date:</strong> {{ review.date }}</p>
                         <p><strong>Review Body:</strong> {{ review.review_body }}</p>
+                        <a href="{{review.rev_link}}">Go To Page</a>
                     </div>
-                {% endfor %}
+                    {% endfor %}
+
             {% else %}
-                <div class="col-sm-5 text-left review-box">
+                <div class="col-sm-5 text-left review-box" id="review-box">
                     <p>Not enough reviews to show here !!</p>
                 </div>
             {% endif %}
@@ -48,7 +51,6 @@
         <!-- Button to trigger sorting -->
 
     </div>
-
     
 </body>
 </html>
